@@ -9,6 +9,8 @@ using ExampleApi.Model;
 using Microsoft.AspNetCore.Cors;
 
 namespace ExampleApi.Controllers {
+    // 允许跨域访问这个控制器 
+    // 参数为：跨域访问规则的名字
     [EnableCors("CorsPolicy")]
     [Route("api/[controller]")]
     [ApiController]

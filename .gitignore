@@ -376,3 +376,7 @@ MigrationBackup/
 FodyWeavers.xsd
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudio,visualstudiocode
+*.pdb
+*.pdb
+*.cache
+.vs/ExampleApi/DesignTimeBuild/.dtbcache.v2
