@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 /*----------------------------------*/
 namespace ExampleApi.Model {
+    /*
+     * 站内信 
+     */
     public class MessageDto {
         [JsonProperty("mid")]
         public uint Id { get; set; }

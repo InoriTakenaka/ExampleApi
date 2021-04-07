@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 
 namespace ExampleApi {
     public class Startup {
+
+        readonly string CorsPolicy_ = "MyCorsPolicy";
+
         public Startup(IConfiguration configuration) {
             Configuration = configuration;
         }
@@ -28,15 +31,32 @@ namespace ExampleApi {
             });
             // 添加允许跨域的中间件
             // 使得web api 支持跨域访问
+
+            /*
+             * 前端项目：localhost:3000
+             * API: localhost:5000
+             */
+
             /**
              * options=> CorsOptions
              * 用来配置跨域政策的
+             * AddCors->添加跨域中间件
+             * 
+             *  AllowAnyOrigins -> 允许任何源
+             *  WithOrigins -> 允许指定源跨域访问
+             *  AllowAnyHeader -> 允许任何HTTP请求头 application/json 复杂请求
+             *  AllowAnyMethod -> 允许任何Method 
+             *  这里的Method指的是HTTP Method
+             *  
+             *  这样就配置好了跨域策略
              */
             services.AddCors(options => {
-                options.AddPolicy("CorsPolicy",
-                    builder => builder.AllowAnyOrigin() // 所有的域都可以访问
-                    .AllowAnyMethod() // 所有的HTTP方法都被允许
-                    .AllowAnyHeader()); // 所有的HTTP请求头都可以                
+                options.AddPolicy(name: CorsPolicy_,
+                    builder => {
+                        builder.WithOrigins("http://localhost:3000")
+                               .AllowAnyHeader()
+                               .AllowAnyMethod();
+                    });
             });
 
             services.AddRouting();
@@ -52,14 +72,18 @@ namespace ExampleApi {
 
             app.UseRouting();
             // 使用跨域的中间件
-            app.UseCors();
+            app.UseCors(
+                builder=> {
+                    builder.AllowAnyOrigin();
+                });
             app.UseAuthorization();
-            // 添加路由终结点
+            /* 添加路由终结点  
+             * 加上这个Endpoints 才能把请求映射到控制器
+             */
             app.UseEndpoints(endpoints => {
+                //endpoints.MapGet(pattern:"/api/[controller]/[action]/{id}")
                 endpoints.MapControllers();
             });
-
-
         }
     }
 }

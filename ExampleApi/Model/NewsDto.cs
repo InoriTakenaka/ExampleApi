@@ -5,6 +5,10 @@ using System.Threading.Tasks;
 /*----------------------------------*/
 using Newtonsoft.Json;
 /*----------------------------------*/
+
+/*
+ * 新闻实体 
+ */
 namespace ExampleApi.Model {
     public class NewsDto {
         [JsonProperty("nid")]

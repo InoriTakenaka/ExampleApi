@@ -10,7 +10,8 @@ using ExampleApi.Model;
 /*-------------------------------------*/
 
 namespace ExampleApi.Controllers {
-    [EnableCors("CorsPolicy")]
+    // api/Message/
+    [EnableCors("MyCorsPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class MessageController : ControllerBase {
@@ -39,15 +40,13 @@ namespace ExampleApi.Controllers {
             }
         };
 
-        [Route("api/[controller]/username/{username}")]
-        [HttpGet]
+        [HttpGet("username/{username}")]
         public ICollection<MessageDto> MessageList([FromRoute] string username) {
             Console.WriteLine($"query user:{username}'s message list");
             return messages_;
         }
 
-        [Route("api/[controller]/mid/{mid}")]
-        [HttpGet]
+        [HttpGet("mid/{mid:int}")]
         public MessageDto MessageDetails([FromRoute] int mid) {
             return
             messages_.Where(e => e.Id == mid)
