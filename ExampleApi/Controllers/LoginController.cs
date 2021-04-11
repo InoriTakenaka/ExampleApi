@@ -11,18 +11,25 @@ using Microsoft.AspNetCore.Cors;
 namespace ExampleApi.Controllers {
     // 允许跨域访问这个控制器 
     // 参数为：跨域访问规则的名字
-    [EnableCors("CorsPolicy")]
+    [EnableCors("MyCorsPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class LoginController : ControllerBase {
         [HttpPost]
-        public IActionResult Login([FromBody]LoginRequestDto request ) {
+        public LoginResponse Login([FromBody]LoginRequestDto request ) {
             Console.WriteLine(request.Password);
             Console.WriteLine(request.UserName);
             if (!ModelState.IsValid) {
-                return BadRequest("Invalid Request");
+                return new LoginResponse {
+                    code = 1,
+                    message = "login failed",
+                };
             }
-            return Ok();
+            return new LoginResponse {
+                code = 0,
+                message = "request success.",
+                username = request.UserName
+            };
         }
     }
 }
