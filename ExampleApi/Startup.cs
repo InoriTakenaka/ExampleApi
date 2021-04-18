@@ -12,6 +12,9 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace ExampleApi {
+
+    using Microsoft.EntityFrameworkCore;
+    using ExampleApi.Services;
     public class Startup {
 
         readonly string CorsPolicy_ = "MyCorsPolicy";
@@ -29,6 +32,8 @@ namespace ExampleApi {
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ExampleApi", Version = "v1" });
             });
+            // 注入依赖
+
             // 添加允许跨域的中间件
             // 使得web api 支持跨域访问
 
@@ -58,8 +63,14 @@ namespace ExampleApi {
                                .AllowAnyMethod();
                     });
             });
-
+            ///
+            ///services.add
+            ///
+            services.AddScoped<IMenuServices, MenuServices>();
             services.AddRouting();
+            services.AddDbContext<ExampleApi.DataSource.ExampleContext>(options => {
+                options.UseSqlite("Data source=E:\\workspace\\SE 2\\ExampleApi\\DB\\example.db");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
