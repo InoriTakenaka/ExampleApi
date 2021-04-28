@@ -3,14 +3,16 @@ using System;
 using ExampleApi.DataSource;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ExampleApi.Migrations
 {
     [DbContext(typeof(ExampleContext))]
-    partial class ExampleContextModelSnapshot : ModelSnapshot
+    [Migration("20210421134024_addtable")]
+    partial class addtable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,13 +80,10 @@ namespace ExampleApi.Migrations
                     b.Property<string>("Authorizer")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("CreateTime")
+                    b.Property<DateTime>("LastModifyTime")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("RoleName")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("UpdateTime")
                         .HasColumnType("TEXT");
 
                     b.HasKey("RoleId");
@@ -96,9 +95,8 @@ namespace ExampleApi.Migrations
                         {
                             RoleId = 1,
                             Auth = "/index/home |\r\n                             /index/users|\r\n                             /index/roles",
-                            CreateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            RoleName = "Admin",
-                            UpdateTime = new DateTime(2021, 4, 21, 21, 45, 48, 523, DateTimeKind.Local).AddTicks(7936)
+                            LastModifyTime = new DateTime(2021, 4, 21, 21, 40, 22, 769, DateTimeKind.Local).AddTicks(8416),
+                            RoleName = "Admin"
                         });
                 });
 #pragma warning restore 612, 618

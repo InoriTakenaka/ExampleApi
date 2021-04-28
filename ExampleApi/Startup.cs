@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ExampleApi {
 
@@ -87,7 +88,13 @@ namespace ExampleApi {
                 builder=> {
                     builder.AllowAnyOrigin();
                 });
-            app.UseAuthorization();
+            
+            app.UseAuthorization(options=> {
+                options.AddPolicy("RequireActive", policy => policy.RequireClaim("Actived"));
+            });
+
+            
+           /// options.AddPolicy("RequireActive", policy => policy.RequireClaim("Actived"));
             /* 添加路由终结点  
              * 加上这个Endpoints 才能把请求映射到控制器
              */

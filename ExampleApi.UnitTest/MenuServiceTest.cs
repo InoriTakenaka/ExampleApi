@@ -38,6 +38,7 @@ namespace ExampleApi.UnitTest {
         };
 
         private async Task<ExampleContext> GetSqliteDbContextAsync() {
+            //
             var options = new DbContextOptionsBuilder<ExampleContext>()
                 //.UseSqlite("Data source = E:\\workspace\\SE 2\\ExampleApi\\DB\\example.test.db");
                 .UseInMemoryDatabase(new Guid().ToString())
@@ -51,11 +52,12 @@ namespace ExampleApi.UnitTest {
 
         [Fact]
         public async Task GetMenusTest() {
+            // arrange 
             var context = await GetSqliteDbContextAsync();
             var services = new MenuServices(context);
-
+            // action 
             var getMenusResult = services.GetMenus();
-
+            // assertion
             Assert.NotEmpty(getMenusResult);
         }
     }

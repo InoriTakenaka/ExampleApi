@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace ExampleApi.Services {
-    using ExampleApi.Model;
     using ExampleApi.DataSource;
+    using ExampleApi.Model;
 
     public class MenuServices:IMenuServices {
         private ExampleContext dbContext_ { set; get; }
         public MenuServices(ExampleContext context) {
             dbContext_ = context;
         }
-
         
        public List<MenuDto> GetMenus() {
             var menus = dbContext_.Menus.ToList();

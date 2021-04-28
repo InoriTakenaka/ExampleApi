@@ -17,4 +17,10 @@ namespace ExampleApi.Model {
         public string Text { get; set; }
         public List<MenuDto> Child { get; set; }
     }
+
+    public class TreeData {
+        public string key { get; set; }
+        public string title { get; set; }
+        public List<TreeData> children { get; set; }
+    }
 }
