@@ -58,11 +58,7 @@ namespace ExampleApi.DataSource {
                         RoleId = 1,
                         RoleName = "Admin",
                         UpdateTime = DateTime.Now,
-                        Auth =                             
-                           @"/index/home |
-                             /index/users|
-                             /index/roles"
-                       
+                                              
                      }                    
                 );
         }

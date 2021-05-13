@@ -89,9 +89,7 @@ namespace ExampleApi {
                     builder.AllowAnyOrigin();
                 });
             
-            app.UseAuthorization(options=> {
-                options.AddPolicy("RequireActive", policy => policy.RequireClaim("Actived"));
-            });
+            app.UseAuthorization();
 
             
            /// options.AddPolicy("RequireActive", policy => policy.RequireClaim("Actived"));
